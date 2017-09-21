@@ -1,0 +1,43 @@
+.stack-container{
+    padding: 8px;
+}
+
+.stack-controller-container{
+    display: flex;
+    border: 1px solid grey;
+    border-radius: 8px;
+    justify-content: space-between;
+    padding: 8px;
+}
+
+
+.stack-message-container{
+    display:flex;
+    border:1px solid grey;
+    margin-top:2px;
+}
+
+.stack-container-item{
+    padding: 8px;
+    font-size:12px;
+    flex:1
+}
+
+
+
+.stack-item{
+    padding: 2px;
+    display: flex
+}
+
+.stack-item-order{
+    flex:.10;
+}
+.stack-item-type{
+    flex:.25;
+}
+
+.stack-item-message{
+    flex:1;
+}
+
