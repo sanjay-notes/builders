@@ -13,7 +13,8 @@
     "release:bugfix": "npm version patch -m 'Bumped patch version number'",
     "release:feature": "npm version minor -m 'Bumped minor version number'",
     "release:breakingchange": "npm version major -m 'Bumped major version number'",
-    "postversion": "git push origin HEAD --follow-tags"
+    "postversion": "git push origin HEAD --follow-tags",
+    "release:master": "git checkout master && git merge --squash develop && git commit -am 'Release Commit'"
   },
   "repository": {
     "type": "git",
