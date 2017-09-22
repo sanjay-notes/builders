@@ -21,6 +21,11 @@
     padding: 8px;
     font-size:12px;
     flex:1
+
+}
+
+.stack-container-item ul{
+    list-style: none;
 }
 
 

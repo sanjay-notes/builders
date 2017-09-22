@@ -49,6 +49,10 @@ export default class Stack extends React.Component {
         })
     }
 
+    componentDidMount(){
+        StackManager.trigger();
+    }
+
     render(){
         let ui = null;
 
