@@ -4,17 +4,17 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "webpack --progress --config webpack.config.js --env prod",
-    "lint": "eslint ./src --ext .js --cache --fix --ext .jsx --cache --fix",
-    "postbuild": "node scripts/postbuild.js",
-    "prebuild": "rimraf lib && rimraf demo",
-    "publish": "git subtree push --prefix demo origin gh-pages",
     "start": "webpack-dev-server --progress --config webpack.config.js --open",
+    "lint": "eslint ./src --ext .js --cache --fix --ext .jsx --cache --fix",
+    "prebuild": "rimraf lib && rimraf demo",
+    "build": "webpack --progress --config webpack.config.js --env prod",
+    "postbuild": "node scripts/postbuild.js",
+    "release:master": "git checkout master && git merge --squash develop && git commit -am 'Release Commit'",
     "release:bugfix": "npm version patch -m 'Bumped patch version number'",
     "release:feature": "npm version minor -m 'Bumped minor version number'",
     "release:breakingchange": "npm version major -m 'Bumped major version number'",
     "postversion": "git push origin HEAD --follow-tags",
-    "release:master": "git checkout master && git merge --squash develop && git commit -am 'Release Commit'"
+    "deploy": "npm run build && git commit -am 'Deploy Commit' && git push && git subtree push --prefix demo origin gh-pages"
   },
   "repository": {
     "type": "git",
