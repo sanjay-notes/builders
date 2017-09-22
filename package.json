@@ -1,0 +1,53 @@
+{
+  "name": "builders",
+  "version": "1.1.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --progress --config webpack.config.js --env prod",
+    "lint": "eslint ./src --ext .js --cache --fix --ext .jsx --cache --fix",
+    "postbuild": "node scripts/postbuild.js",
+    "prebuild": "rimraf lib && rimraf demo",
+    "publish": "git subtree push --prefix demo origin gh-pages",
+    "start": "webpack-dev-server --progress --config webpack.config.js --open",
+    "release:bugfix": "npm version patch -m 'Bumped patch version number'",
+    "release:feature": "npm version minor -m 'Bumped minor version number'",
+    "release:breakingchange": "npm version major -m 'Bumped major version number'",
+    "postversion": "git push origin HEAD --follow-tags",
+    "release:master": "git checkout master && git merge --squash develop && git commit -am 'Release Commit'"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanjay-notes/builders.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sanjay-notes/builders/issues"
+  },
+  "homepage": "https://github.com/sanjay-notes/builders#readme",
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-core": "^6.26.0",
+    "babel-eslint": "^8.0.0",
+    "babel-loader": "^7.1.2",
+    "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.24.1",
+    "css-loader": "^0.28.7",
+    "eslint": "^4.6.1",
+    "eslint-loader": "^1.9.0",
+    "fs-extra": "^4.0.2",
+    "rimraf": "^2.6.2",
+    "style-loader": "^0.18.2",
+    "webpack": "^3.6.0",
+    "webpack-dev-server": "^2.8.2"
+  },
+  "dependencies": {
+    "prop-types": "^15.5.10",
+    "react": "^15.6.1",
+    "react-dom": "^15.6.1"
+  },
+  "files": [
+    "lib"
+  ]
+}

@@ -1,0 +1,21 @@
+.elem {
+    border: solid #43c7e6 3px;;
+    border-radius: 8px;
+    position: relative;
+    margin:2px;
+    border-color: #43c7e6;
+}
+
+.label,
+.endlabel {
+    position: relative;
+    color: #ffffff;
+    line-height: 1em;
+    font-family: monospace;
+    font-size: large;
+    background-color: #43c7e6;
+}
+
+.block-container {
+    padding:8px;
+}
