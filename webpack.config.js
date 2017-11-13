@@ -2,7 +2,7 @@ const webpack = require("webpack");
 const path = require("path");
 const env  = require("yargs").argv.env; // use --env with webpack 2
 
-const libraryName = 'Library';
+const libraryName = 'builders';
 const paths = {
     context: path.join(__dirname, "./src/"),
     output: path.join(__dirname, "./"),
