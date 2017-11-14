@@ -50,13 +50,16 @@
          stack[id] = undefined;
      }
 
-     getStacks(type){
+     getStacks(){
          return this.stacks;
      }
 
-     clearStacks(type){
+     clearStacks(triggerNow){
          this.stacks = {};
          this.order = 0;
+         if(triggerNow){
+             this.trigger()
+         }
      }
 
      hookCallback(callback){

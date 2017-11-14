@@ -1,5 +1,5 @@
 import React from 'react';
-import StackManager from './StackManager';
+import stackManager from './StackManager';
 import './style.css';
 
 export default class Stack extends React.Component {
@@ -13,7 +13,7 @@ export default class Stack extends React.Component {
         this.decrementStackStep = this.decrementStackStep.bind(this);
         this.incrementStackStep = this.incrementStackStep.bind(this);
         this.handleShowAllSteps = this.handleShowAllSteps.bind(this);
-        StackManager.hookCallback(this.renderLater)
+        stackManager.hookCallback(this.renderLater)
     }
 
     componentWillReceiveProps(nextProps){
@@ -49,8 +49,12 @@ export default class Stack extends React.Component {
         })
     }
 
+    clearAllSteps(){
+        stackManager.clearStacks(true);
+    }
+
     componentDidMount(){
-        StackManager.trigger();
+        stackManager.trigger();
     }
 
     render(){
@@ -90,7 +94,10 @@ export default class Stack extends React.Component {
         return (<div className="stack-container">
             <div className="stack-controller-container">
                 <button onClick={this.decrementStackStep}>Prev step</button>
-                <button onClick={this.handleShowAllSteps}>Show All steps</button>
+                <div>
+                 <button onClick={this.handleShowAllSteps}>Show All steps</button>
+                 <button onClick={this.clearAllSteps}>Clear</button>
+                </div>
                 <button onClick={this.incrementStackStep}>Next step</button>
             </div>
 
