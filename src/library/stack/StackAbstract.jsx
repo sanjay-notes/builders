@@ -6,57 +6,53 @@ export default class StackAbstract extends React.Component {
     constructor(props){
         super(props);
         this.isMountStage = true;
-        this.pushStackMessage(this.props.identifier,'Constructor', 'mount', props.enable);
+        this.pushStackMessage(this.props.identifier,'Constructor', 'mount');
     }
 
-    pushStackMessage(identifier, message, type, enable){
-        if(enable){
-            StackManager.pushStackMessage(identifier,message, type);
-        }
+    pushStackMessage(identifier, message, type, triggerNow){
+        triggerNow = triggerNow === undefined ? false : triggerNow;
+        StackManager.pushStackMessage(identifier,message, type, triggerNow);
     }
 
     componentWillReceiveProps(nextProps){
-        this.pushStackMessage(nextProps.identifier, 'componentWillReceiveProps', 'update', nextProps.enable);
+        this.pushStackMessage(nextProps.identifier, 'componentWillReceiveProps', 'update');
         this.isMountStage = false;
     }
 
     componentWillMount(){
-        this.pushStackMessage(this.props.identifier, 'componentWillMount','mount', this.props.enable);
+        this.pushStackMessage(this.props.identifier, 'componentWillMount','mount');
     }
 
 
     shouldComponentUpdate(){
-        this.pushStackMessage(this.props.identifier, 'shouldComponentUpdate' ,'update', this.props.enable);
+        this.pushStackMessage(this.props.identifier, 'shouldComponentUpdate' ,'update');
         return true;
     }
 
     componentWillUpdate(){
-        this.pushStackMessage(this.props.identifier, 'componentWillUpdate', 'update', this.props.enable);
+        this.pushStackMessage(this.props.identifier, 'componentWillUpdate', 'update');
     }
 
     render(){
         const type = this.isMountStage ? 'mount' : 'update';
-        this.pushStackMessage(this.props.identifier, 'render', type, this.props.enable);
+        this.pushStackMessage(this.props.identifier, 'render', type);
     }
 
     componentDidMount(){
-        this.pushStackMessage(this.props.identifier, 'componentDidMount', 'mount', this.props.enable);
+        this.pushStackMessage(this.props.identifier, 'componentDidMount', 'mount');
     }
 
     componentDidUpdate(){
-        this.pushStackMessage(this.props.identifier, 'componentDidUpdate', 'update', this.props.enable);
+        this.pushStackMessage(this.props.identifier, 'componentDidUpdate', 'update');
     }
 
     componentWillUnmount(){
-        this.pushStackMessage(this.props.identifier, 'componentWillUnmount', 'unmount', this.props.enable);
+        this.pushStackMessage(this.props.identifier, 'componentWillUnmount', 'unmount');
     }
 }
 
 StackAbstract.propTypes = {
-    identifier: PropTypes.string,
-    enable: PropTypes.bool
+    identifier: PropTypes.string
 };
 
-StackAbstract.defaultProps = {
-    enable: true
-};
+

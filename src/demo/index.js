@@ -32,7 +32,10 @@ class AppChildren extends StackAbstract {
                     <h3>Proptypes</h3>
                     <ul>
                         <li>identifier:string</li>
-                        <li>enable:boolean (default true)</li>
+                    </ul>
+                    <h3>API</h3>
+                    <ul>
+                        <li>pushStackMessage()</li>
                     </ul>
                     <p>
                         Stack Abstract is an abstract class which stacks the React Life cycle stage for the component that extends them

@@ -5,7 +5,7 @@
         this.order = 0;
     }
 
-     updateOrder( ){
+     incrementOrder( ){
          this.order = this.order + 1;
      }
 
@@ -26,19 +26,22 @@
     }
 
 
-     pushStackMessage(id, message, type){
+     pushStackMessage(id, message, type, triggerNow){
         const stack = this.stacks;
         if(stack){
             if(!stack[id]){
                 stack[id] = []
             }
 
-            this.updateOrder();
+            this.incrementOrder();
             stack[id].push({
                 message: message,
                 order: this.order,
                 type: type
             });
+            if(triggerNow){
+                this.trigger()
+            }
         }
      }
 
