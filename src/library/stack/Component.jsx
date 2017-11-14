@@ -29,7 +29,7 @@ export default class Stack extends React.Component {
     }
 
     incrementStackStep(){
-        const stepValue = this.state.stackStep < StackManager.getOrder() ?  this.state.stackStep + 1 :  this.state.stackStep;
+        const stepValue = this.state.stackStep < stackManager.getOrder() ?  this.state.stackStep + 1 :  this.state.stackStep;
         this.setState({
             stackStep:  stepValue
         })
@@ -64,7 +64,7 @@ export default class Stack extends React.Component {
 
         if(!renderLater){
 
-            const stacks = StackManager.getStacks();
+            const stacks = stackManager.getStacks();
             const stackIds = Object.keys(stacks);
             ui = stackIds.map((id, index)=>{
                 const stack = stacks[id];
