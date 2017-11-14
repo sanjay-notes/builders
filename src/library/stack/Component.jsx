@@ -75,11 +75,15 @@ export default class Stack extends React.Component {
                             if(stackStep > 0 && stackStep < stackObject.order){
                                 return null;
                             }
+                            const styleObject = {}
+                            if(stackObject.type === 'event'){
+                                styleObject.color = "grey";
+                            }
                             const message = stackObject.message;
                             const type = "[" + stackObject.type + "]";
                             const order = stackObject.order + ". ";
                             return (<li  key={stackIndex}>
-                                <div className="stack-item">
+                                <div className="stack-item" style={styleObject}>
                                     <div className="stack-item-order">{order}</div>
                                     <div className="stack-item-type">{type}</div>
                                     <div className="stack-item-message">{message}</div>
