@@ -7,12 +7,14 @@ export default class Stack extends React.Component {
 		super(props);
 		this.state = {
 			renderLater:true,
-			stackStep: 0
+			stackStep: 0,
+			displayAnimationFrame: stackManager.showAnimationFrame
 		};
 		this.renderLater = this.renderLater.bind(this);
 		this.decrementStackStep = this.decrementStackStep.bind(this);
 		this.incrementStackStep = this.incrementStackStep.bind(this);
 		this.handleShowAllSteps = this.handleShowAllSteps.bind(this);
+		this.toggleAnimationFrame = this.toggleAnimationFrame.bind(this);
 		stackManager.hookCallback(this.renderLater)
 	}
 
@@ -51,6 +53,12 @@ export default class Stack extends React.Component {
 
 	clearAllSteps(){
 		stackManager.clearStacks(true);
+	}
+
+	toggleAnimationFrame(){
+		this.setState({
+			displayAnimationFrame:  stackManager.toggleAnimationFrame()
+		})
 	}
 
 	componentDidMount(){
@@ -123,7 +131,9 @@ export default class Stack extends React.Component {
 	render(){
 		let ui = null;
 
-		const {renderLater, stackStep} = this.state;
+		const {renderLater, stackStep, displayAnimationFrame} = this.state;
+
+		const animationFrameButtonName = displayAnimationFrame ? 'Hide': 'Show'
 
 		if(!renderLater){
 			const stacks = stackManager.getStacks();
@@ -136,6 +146,7 @@ export default class Stack extends React.Component {
                 <div>
                     <button onClick={this.handleShowAllSteps}>Show All steps</button>
                     <button onClick={this.clearAllSteps}>Clear</button>
+	                <button onClick={this.toggleAnimationFrame}>{animationFrameButtonName} Animation Frame</button>
                 </div>
                 <button onClick={this.incrementStackStep}>Next step</button>
             </div>

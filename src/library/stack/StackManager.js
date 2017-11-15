@@ -1,11 +1,41 @@
- class StackManager {
+
+let framePrevOrder;
+let animationFrameId;
+let stackFrameEvent = true;
+
+class StackManager {
     constructor(){
         this.stacks = {};
         this.callback = null;
         this.order = 0;
+	    this.showAnimationFrame = true;
+	    this.animationFrameListener = this.animationFrameListener.bind(this);
+	    this.animationFrameListener();
     }
 
-     incrementOrder( ){
+    toggleAnimationFrame(){
+	    this.showAnimationFrame = !this.showAnimationFrame;
+	    return  this.showAnimationFrame;
+    }
+
+    animationFrameListener(){
+        if(stackFrameEvent && this.showAnimationFrame){
+	        this.pushStackMessage('frame', 'onAnimationFrame', 'event', true)
+        }
+	    animationFrameId = window.requestAnimationFrame(this.animationFrameListener);
+    }
+
+    stopTracingAnimationFrame(){
+	    animationFrameId = undefined;
+	    framePrevOrder = undefined;
+	    stackFrameEvent = false;
+    }
+
+	startTracingAnimationFrame(){
+		stackFrameEvent = true;
+	}
+
+     incrementOrder(){
          this.order = this.order + 1;
      }
 
@@ -25,12 +55,23 @@
         }
     }
 
-
      pushStackMessage(id, message, type, triggerNow){
         const stack = this.stacks;
         if(stack){
             if(!stack[id]){
                 stack[id] = []
+            }
+
+	        if(id === 'frame'){
+                const currentOrder = this.getOrder();
+		        if (framePrevOrder === currentOrder) {
+			        this.stopTracingAnimationFrame();
+			        return;
+		        } else {
+			        framePrevOrder = currentOrder + 1;
+                }
+	        } else {
+		        this.startTracingAnimationFrame();
             }
 
             this.incrementOrder();
@@ -70,6 +111,8 @@
          this.callback && this.callback();
      }
 }
+
+
 
 const singletonInstance = new StackManager();
 export default singletonInstance;
