@@ -20,6 +20,7 @@ class StackManager {
 
     animationFrameListener(){
         if(stackFrameEvent && this.showAnimationFrame){
+        	console.log('pushStackMessage', framePrevOrder, this.getOrder())
 	        this.pushStackMessage('frame', 'onAnimationFrame', 'event', true)
         }
 	    animationFrameId = window.requestAnimationFrame(this.animationFrameListener);
@@ -67,14 +68,17 @@ class StackManager {
 		        if (framePrevOrder === currentOrder) {
 			        this.stopTracingAnimationFrame();
 			        return;
-		        } else {
-			        framePrevOrder = currentOrder + 1;
-                }
+		        }
 	        } else {
 		        this.startTracingAnimationFrame();
             }
 
             this.incrementOrder();
+
+	        if(id === 'frame') {
+		        framePrevOrder = this.getOrder();
+	        }
+
             stack[id].push({
                 message: message,
                 order: this.order,
