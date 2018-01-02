@@ -16,6 +16,9 @@ export default class Stack extends React.Component {
 		this.handleShowAllSteps = this.handleShowAllSteps.bind(this);
 		this.toggleAnimationFrame = this.toggleAnimationFrame.bind(this);
 		stackManager.hookCallback(this.renderLater)
+		if(props.clear){
+			this.clearAllSteps();
+		}
 	}
 
 	componentWillReceiveProps(nextProps){
