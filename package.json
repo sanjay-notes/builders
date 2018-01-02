@@ -1,7 +1,7 @@
 {
   "name": "builders",
-  "version": "2.0.0",
-  "description": "",
+  "version": "2.7.0",
+  "description": "Components that help to build react tutorials",
   "main": "lib/builders.js",
   "files": [
     "lib"
@@ -12,10 +12,10 @@
     "prebuild": "rimraf lib && rimraf demo",
     "build": "webpack --progress --config webpack.config.js --env prod",
     "postbuild": "node scripts/postbuild.js",
-    "release:master": "git checkout master && git merge --squash develop && git commit -am 'Release Commit'",
-    "release:bugfix": "npm version patch -m 'Bumped patch version number'",
-    "release:feature": "npm version minor -m 'Bumped minor version number'",
-    "release:breakingchange": "npm version major -m 'Bumped major version number'",
+    "release:breakingchange": "npm version major -m 'Bumped major version number' && npm run release:master",
+    "release:bugfix": "npm version patch -m 'Bumped patch version number' && npm run release:master",
+    "release:feature": "npm version minor -m 'Bumped minor version number' && npm run release:master",
+    "release:master": "git checkout master && git merge --squash --strategy-option theirs develop && git commit -am 'Release Commit' && git push && git checkout develop",
     "postversion": "git push origin HEAD --follow-tags",
     "deploy": "npm run build && git commit -am 'Deploy Commit' && git push && git subtree push --prefix demo origin gh-pages"
   },
@@ -23,8 +23,8 @@
     "type": "git",
     "url": "git+https://github.com/sanjay-notes/builders.git"
   },
-  "author": "",
-  "license": "ISC",
+  "author": "Sanjay Krishna Anbalagan",
+  "license": "MIT",
   "bugs": {
     "url": "https://github.com/sanjay-notes/builders/issues"
   },

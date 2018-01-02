@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import StackManager from './StackManager'
+import stackManager from './StackManager'
 
 export default class StackAbstract extends React.Component {
     constructor(props){
@@ -11,7 +11,7 @@ export default class StackAbstract extends React.Component {
 
     pushStackMessage(identifier, message, type, triggerNow){
         triggerNow = triggerNow === undefined ? false : triggerNow;
-        StackManager.pushStackMessage(identifier,message, type, triggerNow);
+        stackManager.pushStackMessage(identifier,message, type, triggerNow);
     }
 
     componentWillReceiveProps(nextProps){
@@ -54,3 +54,5 @@ export default class StackAbstract extends React.Component {
 StackAbstract.propTypes = {
     identifier: PropTypes.string
 };
+
+

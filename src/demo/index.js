@@ -58,6 +58,7 @@ class App extends React.Component {
         return (
             <div>
                 <AppChildren identifier="child1"/>
+                <AppChildren identifier="child2"/>
                 <div style={{padding:"32px"}}>
                     <Stack/>
                     <p>UI interface to see the stack, number will represent the order in which they called</p>
