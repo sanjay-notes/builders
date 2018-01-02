@@ -19,6 +19,9 @@ export default class Stack extends React.Component {
 	}
 
 	componentWillReceiveProps(nextProps){
+		if(nextProps.clear){
+			this.clearAllSteps();
+		}
 		this.setState({
 			renderLater:true
 		})
