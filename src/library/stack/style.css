@@ -5,21 +5,43 @@
 .stack-controller-container{
     display: flex;
     border: 1px solid grey;
-    border-radius: 8px;
     justify-content: space-between;
-    padding: 8px;
+    padding: 10px 32px;
+}
+
+.stack-controller-container button{
+    border-radius:8px;
+    border:1px solid #18ab29;
+    display:inline-block;
+    cursor:pointer;
+    color:#18ab29;
+    font-family:Arial;
+    font-size:14px;
+    padding:7px 14px;
+    text-decoration:none;
+}
+
+
+.stack-controller-container button:hover {
+    background-color:#5cbf2a;
+    color: white;
+}
+.stack-controller-container button:active {
+    position:relative;
+    top:1px;
 }
 
 
 .stack-message-container{
     display:flex;
-    border:1px solid grey;
-    margin-top:2px;
+    border-bottom:1px solid grey;
+    border-left:1px solid grey;
+    border-right:1px solid grey;
 }
 
 .stack-container-item{
     padding: 8px;
-    font-size:12px;
+    font-size:14px;
     flex:1
 
 }

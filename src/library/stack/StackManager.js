@@ -44,18 +44,6 @@ class StackManager {
         return this.order;
      }
 
-
-     getStack(id){
-        const stack = this.stacks;
-        if (stack[id]) {
-            return stack[id]
-        }
-        else{
-            stack[id] = [];
-            return stack[id]
-        }
-    }
-
      pushStackMessage(id, message, type, triggerNow){
         const stack = this.stacks;
         if(stack){
@@ -95,9 +83,12 @@ class StackManager {
          stack[id] = undefined;
      }
 
-     getStacks(){
-         return this.stacks;
-     }
+	getStacks(id){
+		if(id && this.stacks[id]){
+			return this.stacks[id];
+		}
+		return this.stacks;
+	}
 
      clearStacks(triggerNow){
          this.stacks = {};
