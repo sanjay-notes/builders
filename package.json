@@ -1,6 +1,6 @@
 {
   "name": "builders",
-  "version": "2.9.0",
+  "version": "2.10.0",
   "description": "Components that help to build react tutorials",
   "main": "lib/builders.js",
   "files": [
@@ -48,6 +48,9 @@
   "dependencies": {
     "prop-types": "^15.5.10",
     "react": "^15.6.1",
-    "react-dom": "^15.6.1"
+    "react-dom": "^15.6.1",
+    "react-html-parser": "^2.0.2",
+    "react-syntax-highlighter": "^6.1.1",
+    "remarkable": "^1.7.1"
   }
 }
