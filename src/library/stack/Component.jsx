@@ -15,16 +15,12 @@ export default class Stack extends React.Component {
 		this.incrementStackStep = this.incrementStackStep.bind(this);
 		this.handleShowAllSteps = this.handleShowAllSteps.bind(this);
 		this.toggleAnimationFrame = this.toggleAnimationFrame.bind(this);
-		stackManager.hookCallback(this.renderLater)
-		if(props.clear){
-			this.clearAllSteps();
-		}
+		this.getStepValue = this.getStepValue.bind(this);
+		stackManager.hookCallback(this.renderLater);
+		this.renderedSteps = [];
 	}
 
 	componentWillReceiveProps(nextProps){
-		if(nextProps.clear){
-			this.clearAllSteps();
-		}
 		this.setState({
 			renderLater:true
 		})
@@ -36,16 +32,45 @@ export default class Stack extends React.Component {
 		})
 	}
 
+	getStepValue(isIncrement = true){
+		let stepValue;
+		if(isIncrement){
+			stepValue = this.state.stackStep < stackManager.getOrder() ?  this.state.stackStep + 1 :  this.state.stackStep;
+		} else {
+			stepValue = this.state.stackStep > 1 ? this.state.stackStep - 1 : 1;
+		}
+
+		if(this.renderedSteps && this.renderedSteps.length > 0) {
+			const lastStep = this.renderedSteps[this.renderedSteps.length - 1]
+			const firstStep = this.renderedSteps[0]
+			while(this.renderedSteps.indexOf(stepValue) === -1){
+				if(isIncrement){
+					if(stepValue > lastStep){
+						return lastStep;
+					}
+					stepValue++
+				}else{
+					if(stepValue < firstStep){
+						return firstStep;
+					}
+					stepValue--
+				}
+
+			}
+			return stepValue;
+		}
+		return stepValue;
+	}
+
 	incrementStackStep(){
-		const stepValue = this.state.stackStep < stackManager.getOrder() ?  this.state.stackStep + 1 :  this.state.stackStep;
+		const stepValue = this.getStepValue();
 		this.setState({
 			stackStep:  stepValue
 		})
 	}
 
 	decrementStackStep(){
-		const stepValue = this.state.stackStep > 1 ?  this.state.stackStep - 1 :  1;
-
+		const stepValue = this.getStepValue(false);
 		this.setState({
 			stackStep:  stepValue
 		})
@@ -101,6 +126,9 @@ export default class Stack extends React.Component {
 	renderStack(stack, stackStep){
         let prevOrderNumber;
 		return stack.map((stackObject, stackIndex) => {
+			if(stackStep === 0){
+				this.renderedSteps.push(stackObject.order);
+			}
 			if(stackStep > 0 && stackStep < stackObject.order){
 				return null;
 			}
@@ -121,9 +149,20 @@ export default class Stack extends React.Component {
 		})
     }
 
-	renderStacks(stacks, stackStep){
+	renderStacks(stacks, stackStep, identifier, displayAnimationFrame){
 		const stackIds = Object.keys(stacks);
+		(stackStep === 0) && (this.renderedSteps = []);
 		return stackIds.map((id, index)=>{
+			if(identifier && id !== identifier){
+				if(displayAnimationFrame){
+					if(id !== 'frame'){
+						return;
+					}
+				}else{
+					return;
+				}
+			}
+
 			const stack = stacks[id];
 			const ui = this.renderStack(stack, stackStep)
 			return (
@@ -143,7 +182,7 @@ export default class Stack extends React.Component {
 
 		if(!renderLater){
 			const stacks = stackManager.getStacks();
-			ui = this.renderStacks(stacks, stackStep);
+			ui = this.renderStacks(stacks, stackStep, this.props.identifier, displayAnimationFrame);
 		}
 
 		return (<div className="stack-container">
