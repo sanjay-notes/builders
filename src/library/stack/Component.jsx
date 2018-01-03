@@ -187,13 +187,13 @@ export default class Stack extends React.Component {
 
 		return (<div className="stack-container">
             <div className="stack-controller-container">
-                <button onClick={this.decrementStackStep}>Prev step</button>
+                <button className="stack-controller-prev" onClick={this.decrementStackStep}>&lt;</button>
                 <div>
-                    <button onClick={this.handleShowAllSteps}>Show All steps</button>
-                    <button onClick={this.clearAllSteps}>Clear</button>
-	                <button onClick={this.toggleAnimationFrame}>{animationFrameButtonName} Animation Frame</button>
+                    <button className="stack-controller-showall" onClick={this.handleShowAllSteps}>Show All steps</button>
+                    <button className="stack-controller-clear" onClick={this.clearAllSteps}>Clear</button>
+	                <button className="stack-controller-animation" onClick={this.toggleAnimationFrame}>{animationFrameButtonName} Animation Frame</button>
                 </div>
-                <button onClick={this.incrementStackStep}>Next step</button>
+                <button className="stack-controller-next" onClick={this.incrementStackStep}>&gt;</button>
             </div>
 
             <div className="stack-message-container">
