@@ -1,6 +1,6 @@
 {
   "name": "builders",
-  "version": "2.9.0",
+  "version": "2.10.0",
   "description": "Components that help to build react tutorials",
   "main": "lib/builders.js",
   "files": [
