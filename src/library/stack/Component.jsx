@@ -149,18 +149,33 @@ export default class Stack extends React.Component {
 		})
     }
 
+    shouldRenderId(id, identifier, displayAnimationFrame){
+		if(Array.isArray(identifier)){
+			const copy = identifier.slice();
+			displayAnimationFrame && copy.push('frame');
+			if(copy.indexOf(id) === -1){
+				return false
+			}else{
+				return true;
+			}
+
+		} else if(typeof identifier === 'string'){
+			if(displayAnimationFrame){
+				if(id === 'frame'){
+					return true
+				}
+			}
+			return id === identifier
+		}
+    }
+
 	renderStacks(stacks, stackStep, identifier, displayAnimationFrame){
 		const stackIds = Object.keys(stacks);
 		(stackStep === 0) && (this.renderedSteps = []);
 		return stackIds.map((id, index)=>{
-			if(identifier && id !== identifier){
-				if(displayAnimationFrame){
-					if(id !== 'frame'){
-						return;
-					}
-				}else{
-					return;
-				}
+			const shouldRender = this.shouldRenderId(id, this.props.identifier, displayAnimationFrame);
+			if(!shouldRender){
+				return;
 			}
 
 			const stack = stacks[id];

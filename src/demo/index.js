@@ -60,7 +60,7 @@ class App extends React.Component {
                 <AppChildren identifier="child1"/>
                 <AppChildren identifier="child2"/>
                 <div style={{padding:"32px"}}>
-                    <Stack identifier="child1"/>
+                    <Stack identifier={["child1",'child2']}/>
                     <p>UI interface to see the stack, number will represent the order in which they called</p>
                     <h4>Requirements</h4>
                     <ul>
